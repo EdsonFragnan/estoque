@@ -1,0 +1,24 @@
+{
+  "name": "node-authentication",
+  "main": "app.js",
+  "dependencies": {
+    "bcrypt-nodejs": "latest",
+    "body-parser": "^1.17.2",
+    "connect-flash": "~0.1.1",
+    "ejs": "~0.8.5",
+    "express": "~3.4.4",
+    "fs": "0.0.1-security",
+    "method-override": "^2.3.9",
+    "moment": "^2.18.1",
+    "mongodb": "^2.2.27",
+    "passport-local": "~0.1.6",
+    "path": "^0.12.7",
+    "socket.io": "^2.0.3"
+  },
+  "engines": {
+    "node": "7.10.0"
+  },
+  "scripts": {
+    "start": "node app"
+  }
+}
