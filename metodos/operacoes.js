@@ -54,7 +54,7 @@ module.exports = {
   },
 
   execUpdateOne: (db, collectionAccess, req, callback) => {
-    db.collection(collectionAccess).updateOne({cpf: req.cpf}, {$set:req}, (err, data) => {
+    db.collection(collectionAccess).updateOne({_id: req._id}, {$set:req}, (err, data) => {
       if (err) {
         callback(err, null);
       } else {

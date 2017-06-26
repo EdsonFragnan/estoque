@@ -36,9 +36,57 @@
       };
 
       $(function(){
-        var valorDaDiv = $(".mensagemResp").text();
-        $(".mensagemResp").html(valorDaDiv);
+        var valorDaDiv = $(".aviso").text();
+        $(".aviso").html(valorDaDiv);
       });
+
+      function valAlteraProduto(val) {
+        console.log(JSON.stringify(val));
+        $('.formProduto').html(
+          '<div class="form-group">' +
+            '<label>' +
+              '<span>ID produto: </span>' +
+            '</label>' +
+            '<input type="text" class="form-control" name="_id" placeholder="ID produto" value="'+ val._id +'" readonly>' +
+          '</div>' +
+          '<div class="form-group">' +
+            '<label>' +
+              '<span>Nome: </span>' +
+            '</label>' +
+            '<input type="text" class="form-control" name="Nome" placeholder="Nome" value="" required>' +
+          '</div>' +
+          '<div class="form-group">' +
+            '<label>' +
+              '<span>Marca: </span>' +
+            '</label>' +
+            '<input type="text" class="form-control" name="marca" placeholder="Marca" value="" required>' +
+          '</div>' +
+          '<div class="form-group">' +
+            '<label>' +
+              '<span>Descrição: </span>' +
+            '</label>' +
+            '<input type="text" class="form-control" name="descricao" placeholder="Descrição" value="" required>' +
+          '</div>' +
+          '<div class="form-group">' +
+            '<label>' +
+              '<span>Categoria: </span>' +
+            '</label>' +
+            '<input type="text" class="form-control" name="categoria" placeholder="Categoria" value="" required>' +
+          '</div>' +
+          '<div class="form-group">' +
+            '<label>' +
+              '<span>Valor: </span>' +
+            '</label>' +
+            '<input type="text" class="form-control" name="valor" placeholder="Valor" value="" required>' +
+          '</div>' +
+          '<div class="form-group">' +
+            '<label>' +
+              '<span>Quantidade: </span>' +
+            '</label>' +
+            '<input type="text" class="form-control" name="quantidade" placeholder="Quantidade" value="" required>' +
+          '</div>'
+        )
+      };
     </script>
 </head>
 
@@ -97,10 +145,7 @@
                         </li>
                     </ol>
                     <% if(mensagem.length > 0){ %>
-                      <div class="mensagemResp">
-                        <%= mensagem %>
-                        <br />
-                      </div>
+                      <div class="alert alert-warning aviso"><h2><%= mensagem %></h2></div>
                     <% } else{ %>
                         <div class="table-responsive">
                           <table class="table table-hover">
@@ -134,7 +179,7 @@
                                          <a type="button" data-toggle="modal" data-target="#myModal" class="btn btn-danger deletaAviso" id="<%= produtos[i].id %>" onclick="valProduto(this.id)">
                                            <span class="glyphicon glyphicon-trash"></span>
                                          </a>
-                                         <a type="button" data-toggle="modal" data-target="#myModalEdit" class="btn btn-warning" id="<%= produtos[i].id %>" onclick="valProduto(this.id)">
+                                         <a type="button" data-toggle="modal" data-target="#myModalEdit" class="btn btn-warning" id="<%= produtos[i] %>" onclick="valAlteraProduto(this.id)">
                                            <span class="glyphicon glyphicon-edit"></span>
                                          </a>
                                        </td>
@@ -151,57 +196,7 @@
                                           <form method="POST" action="/listaprodutos">
                                             <input type="hidden" name="_method" value="PATCH"/>
                                             <div class="col-lg-12">
-                                              <div class="col-lg-6">
-                                                <div class="form-group">
-                                                  <label>
-                                                    <span>ID produto: </span>
-                                                  </label>
-                                                  <input type="text" class="form-control" name="id" placeholder="ID produto" value="<%=produtos[i].id%>" readonly>
-                                                </div>
-
-                                                <div class="form-group">
-                                                  <label>
-                                                    <span>Nome: </span>
-                                                  </label>
-                                                  <input type="text" class="form-control" name="nome" placeholder="Nome" value="<%=produtos[i].Nome%>" required>
-                                                </div>
-
-                                                <div class="form-group">
-                                                  <label>
-                                                    <span>Marca: </span>
-                                                  </label>
-                                                  <input type="text" class="form-control" name="marca" placeholder="Marca" value="<%=produtos[i].marca%>" required>
-                                                </div>
-
-                                                <div class="form-group">
-                                                  <label>
-                                                    <span>Descrição: </span>
-                                                  </label>
-                                                  <input type="text" class="form-control" name="descricao" placeholder="Descrição" value="<%= produtos[i].descricao %>" required>
-                                                </div>
-
-                                                <div class="form-group">
-                                                  <label>
-                                                    <span>Categoria: </span>
-                                                  </label>
-                                                  <input type="text" class="form-control" name="categoria" placeholder="Categoria" value="<%= produtos[i].categoria %>" required>
-                                                </div>
-
-                                                <div class="form-group">
-                                                  <label>
-                                                    <span>Valor: </span>
-                                                  </label>
-                                                  <input type="text" class="form-control" name="valor" placeholder="Valor" value="<%= produtos[i].valor %>" required>
-                                                </div>
-
-                                                <div class="form-group">
-                                                  <label>
-                                                    <span>Quantidade: </span>
-                                                  </label>
-                                                  <input type="text" class="form-control" name="quantidade" placeholder="Quantidade" value="<%= produtos[i].quantidade %>" required>
-                                                </div>
-
-                                              </div>
+                                              <div class="col-lg-6 formProduto"></div>
                                             </div>
                                             <div class="modal-footer">
                                               <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
