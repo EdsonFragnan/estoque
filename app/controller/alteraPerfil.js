@@ -15,9 +15,9 @@ module.exports.alteraPerfil = (req, res, callback) => {
     'uf': req.body.uf,
     'cep': req.body.cep
   };
-  db.updateOne(request, 'estoque_usuario', function(err, avisos) {
+  db.updateOne(request, 'estoque_usuario', function(err, data) {
     if (err) {
-      return callback(req.flash('loginMessage', ''));
+      return callback(req.flash('loginMessage', 'Erro na alteração.'));
     } else {
       return callback(null, req.flash('loginMessage', 'Alteração feita com sucesso.'));
     }

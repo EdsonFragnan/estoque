@@ -9,6 +9,7 @@ const deletaProdutos = require('./controller/deletaProdutos');
 const alteraPerfil = require('./controller/alteraPerfil');
 const listaUsuarios = require('./controller/listaUsuarios');
 const deletaUsuario = require('./controller/deletaUser');
+const alteraProduto = require('./controller/alteraProduto');
 const menu = require('./menu.js');
 
 module.exports = function(app, passport) {
@@ -76,7 +77,6 @@ module.exports = function(app, passport) {
 		});
 	});
 
-
 	app.get('/listaprodutos', isLoggedIn, function(req, res) {
 		produtos.listarProdutos(req, res, (err, produtos) => {
 			const menuMontado = menu.tipoUser(req.user.tipoUsuario);
@@ -90,6 +90,27 @@ module.exports = function(app, passport) {
 				res.render('listaprodutos.ejs', {
 					user: req.user,
 					mensagem: '',
+					produtos: produtos,
+					menu: menuMontado[0]
+				});
+			}
+		});
+	});
+
+	app.patch('/listaprodutos', isLoggedIn, function(req, res) {
+		alteraProduto.produto(req, res, (err, produtos) => {
+			const menuMontado = menu.tipoUser(req.user.tipoUsuario);
+			if (err) {
+				res.render('listaprodutos.ejs', {
+					user: req.user,
+					mensagem: '<h3 class="bg-danger alerta">Alteração não realizada.</h3>',
+					produtos: produtos,
+					menu: menuMontado[0]
+				});
+			} else {
+				res.render('listaprodutos.ejs', {
+					user: req.user,
+					mensagem: '<h3 class="bg-success alerta">' + req.flash('loginMessage') + ' <small>Atualize a página para ver a alteração.</small></h3>',
 					produtos: produtos,
 					menu: menuMontado[0]
 				});
@@ -124,7 +145,6 @@ module.exports = function(app, passport) {
 			}
 		});
 	});
-
 
 	app.get('/cadastrousuario', isLoggedIn, function(req, res) {
 		const menuMontado = menu.tipoUser(req.user.tipoUsuario);
