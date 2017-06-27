@@ -1,3 +1,4 @@
+var ObjectId = require('mongodb').ObjectID;
 module.exports = {
   execFindOne: (db, req, callback) => {
     const envio = {
@@ -54,7 +55,9 @@ module.exports = {
   },
 
   execUpdateOne: (db, collectionAccess, req, callback) => {
-    db.collection(collectionAccess).updateOne({_id: req._id}, {$set:req}, (err, data) => {
+    const id = req._id;
+    delete req._id;
+    db.collection(collectionAccess).update({_id: new ObjectId(id)}, {$set:req}, (err, data) => {
       if (err) {
         callback(err, null);
       } else {

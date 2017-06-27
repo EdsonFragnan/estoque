@@ -103,15 +103,15 @@ module.exports = function(app, passport) {
 			if (err) {
 				res.render('listaprodutos.ejs', {
 					user: req.user,
-					mensagem: '<h3 class="bg-danger alerta">Alteração não realizada.</h3>',
+					mensagem: '<h2 class="bg-danger aviso">Alteração não realizada.</h2>',
 					produtos: produtos,
 					menu: menuMontado[0]
 				});
 			} else {
 				res.render('listaprodutos.ejs', {
 					user: req.user,
-					mensagem: '<h3 class="bg-success alerta">' + req.flash('loginMessage') + ' <small>Atualize a página para ver a alteração.</small></h3>',
-					produtos: produtos,
+					mensagem: '<h3 class="bg-success aviso">' + req.flash('loginMessage') + ' <small>Atualize a página para ver a alteração.</small></h3>',
+					produtos: JSON.parse(req.body.val),
 					menu: menuMontado[0]
 				});
 			}

@@ -27,6 +27,15 @@
         text-align: center;
         padding: 10px;
       }
+      .respId {
+        display: none;
+      }
+      .buttons {
+          margin-right: 30px;
+          margin-bottom: 20px;
+          text-align: right;
+          border-top: 0px solid #e5e5e5;
+      }
 		</style>
     <script>
       $(function(){
@@ -96,8 +105,6 @@
 
                       <div id="myModal" class="modal fade" role="dialog">
                         <div class="modal-dialog">
-
-                          <!-- Modal content-->
                           <div class="modal-content">
                             <div class="modal-header">
                               <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -108,11 +115,11 @@
                                 <input type="hidden" name="_method" value="PATCH"/>
                                 <div class="col-lg-12">
                                   <div class="col-lg-6">
-                                    <div class="form-group">
+                                    <div class="form-group respId">
                                     	<label>
                                 				<span>ID: </span>
                                 			</label>
-                                			<input type="text" class="form-control" name="_id" placeholder="Nome" value="<%= user._id %>" readonly>
+                                			<input type="text" class="form-control" name="_id" placeholder="ID" value="<%= user._id %>" readonly>
                                 		</div>
                                     <div class="form-group">
                                     	<label>
@@ -160,66 +167,65 @@
                                       <label>
                                         <span>Data cadastro:</span>
                                       </label>
-                                      <input type="text" class="form-control" name="data_cadastro" placeholder="Data cadastro" value="<%= user.data_cadastro %>" required>
+                                      <input type="text" class="form-control dataAdmissao" name="data_cadastro" placeholder="Data cadastro" value="<%= user.data_cadastro %>" required>
                                     </div>
+                                  </div>
+                                  <div class="col-lg-6">
+                                    <div class="form-group">
+                                      <label>
+                                        <span>Sobrenome:</span>
+                                      </label>
+                                      <input type="text" class="form-control" name="sobrenome" placeholder="Sobrenome" value="<%= user.sobrenome %>" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                      <label>
+                                        <span>RG:</span>
+                                      </label>
+                                      <input type="text" class="form-control" name="rg" placeholder="RG" value="<%= user.rg %>" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                			<label>
+                                				<span>Senha:</span>
+                                			</label>
+                                			<input type="text" class="form-control" name="senha" placeholder="Senha" value="<%= user.senha %>" required>
+                                		</div>
+
+                                    <div class="form-group">
+                                      <label>
+                                        <span>Cargo:</span>
+                                      </label>
+                                      <input type="text" class="form-control" name="cargo" placeholder="Cargo" value="<%= user.cargo %>" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                      <label>
+                                        <span>CEP:</span>
+                                      </label>
+                                      <input type="text" class="form-control" name="cep" placeholder="CEP" value="<%= user.cep %>" required>
+                                    </div>
+                                    <div class="form-group">
+                                      <label>
+                                        <span>UF:</span>
+                                      </label>
+                                      <input type="text" class="form-control" name="uf" placeholder="UF" value="<%= user.uf %>" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                      <label>
+                                        <span>Foto usuário:</span>
+                                      </label>
+                                      <input name="imagem" class="form-control" type="file"  value="<%= user.imagem %>" />
+                                    </div>
+                                  </div>
+
                                 </div>
-
-                              <div class="col-lg-6">
-                                  <div class="form-group">
-                                    <label>
-                                      <span>Sobrenome:</span>
-                                    </label>
-                                    <input type="text" class="form-control" name="sobrenome" placeholder="Sobrenome" value="<%= user.sobrenome %>" required>
-                                  </div>
-
-                                  <div class="form-group">
-                                    <label>
-                                      <span>RG:</span>
-                                    </label>
-                                    <input type="text" class="form-control" name="rg" placeholder="RG" value="<%= user.rg %>" required>
-                                  </div>
-
-                                  <div class="form-group">
-                              			<label>
-                              				<span>Senha:</span>
-                              			</label>
-                              			<input type="text" class="form-control" name="senha" placeholder="Senha" value="<%= user.senha %>" required>
-                              		</div>
-
-                                  <div class="form-group">
-                                    <label>
-                                      <span>Cargo:</span>
-                                    </label>
-                                    <input type="text" class="form-control" name="cargo" placeholder="Cargo" value="<%= user.cargo %>" required>
-                                  </div>
-
-                                  <div class="form-group">
-                                    <label>
-                                      <span>CEP:</span>
-                                    </label>
-                                    <input type="text" class="form-control" name="cep" placeholder="CEP" value="<%= user.cep %>" required>
-                                  </div>
-                                  <div class="form-group">
-                                    <label>
-                                      <span>UF:</span>
-                                    </label>
-                                    <input type="text" class="form-control" name="uf" placeholder="UF" value="<%= user.uf %>" required>
-                                  </div>
-
-                                  <div class="form-group">
-                                    <label>
-                                      <span>Foto usuário:</span>
-                                    </label>
-                                    <input name="imagem" class="form-control" type="file"  value="<%= user.imagem %>" />
-                                  </div>
-
+                                <div class="buttons">
+                                  <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                  <button type="submit" class="btn btn-success">Alterar dados</button>
                                 </div>
-                            </div>
-
-                          </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                              <button type="submit" class="btn btn-success">Alterar dados</button>
+                              </form>
                             </div>
                           </div>
                         </div>
@@ -234,7 +240,6 @@
 												<h4>Meus dados: </h4>
 												<hr>
 												<div>
-													<p><strong>Id</strong>: <%= user._id %></p><hr>
 													<p><strong>Nome</strong>: <%= user.nome %></p><hr>
 													<p><strong>Sobrenome</strong>: <%= user.sobrenome %> </p><hr>
 													<p><strong>CPF</strong>: <%= user.cpf %> </p><hr>
@@ -245,7 +250,7 @@
 													<p><strong>Bairro</strong>: <%= user.bairro %> </p><hr>
 													<p><strong>UF</strong>: <%= user.uf %> </p><hr>
 													<p><strong>CEP</strong>: <%= user.cep %> </p><hr>
-                          <p><strong>Data cadastro</strong>: <span id="dataAdmissao"><%= user.data_cadastro %> </span></p><hr>
+                          <p><strong>Data cadastro</strong>: <span class="dataAdmissao"><%= user.data_cadastro %> </span></p><hr>
 													<p><strong>Senha</strong>: <%= user.senha %> </p>
 												</div>
 											</div>
@@ -263,9 +268,9 @@
     <script src="js/moment/moment.js"></script>
     <script>
       $(document).ready(function(){
-        var contents = $('#dataAdmissao');
+        var contents = $('.dataAdmissao');
         var dataMontada = moment(contents).format('DD/MM/YYYY');
-        $("#dataAdmissao").html(dataMontada);
+        $(".dataAdmissao").html(dataMontada);
       });
     </script>
     <script type="text/javascript" src="/meuJs/apoio.js"></script>

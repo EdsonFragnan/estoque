@@ -2,6 +2,7 @@ const db = require('../../metodos/metodos.js');
 
 module.exports.alteraPerfil = (req, res, callback) => {
   const request = {
+    '_id': req.body._id,
     'cargo': req.body.cargo,
     'nome': req.body.nome,
     'cpf': req.body.cpf,

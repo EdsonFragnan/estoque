@@ -23,6 +23,15 @@
       }
       .aviso {
         text-align: center;
+        padding: 10px;
+      }
+      .respProdutos {
+        display: none;
+      }
+      .buttons {
+          margin-right: 30px;
+          text-align: right;
+          border-top: 0px solid #e5e5e5;
       }
     </style>
     <script src="js/jquery.js"></script>
@@ -36,57 +45,60 @@
       };
 
       $(function(){
-        var valorDaDiv = $(".aviso").text();
-        $(".aviso").html(valorDaDiv);
-      });
+        $('.editarProd').click(function(){
+          var val = JSON.parse($(this).attr('id'));
+          $('.formProduto').html(
+            '<input type="text" class="form-control respProdutos" name="val" placeholder="" value="<%= JSON.stringify(produtos) %>" readonly>' +
+            '<div class="form-group respProdutos">' +
+              '<label>' +
+                '<span>ID produto: </span>' +
+              '</label>' +
+              '<input type="text" class="form-control" name="_id" placeholder="ID produto" value="'+ val._id +'" readonly>' +
+            '</div>' +
+            '<div class="form-group">' +
+              '<label>' +
+                '<span>Nome: </span>' +
+              '</label>' +
+              '<input type="text" class="form-control" name="Nome" placeholder="Nome" value="'+ val.Nome +'" required>' +
+            '</div>' +
+            '<div class="form-group">' +
+              '<label>' +
+                '<span>Marca: </span>' +
+              '</label>' +
+              '<input type="text" class="form-control" name="marca" placeholder="Marca" value="'+ val.marca +'" required>' +
+            '</div>' +
+            '<div class="form-group">' +
+              '<label>' +
+                '<span>Descrição: </span>' +
+              '</label>' +
+              '<input type="text" class="form-control" name="descricao" placeholder="Descrição" value="'+ val.descricao +'" required>' +
+            '</div>' +
+            '<div class="form-group">' +
+              '<label>' +
+                '<span>Categoria: </span>' +
+              '</label>' +
+              '<input type="text" class="form-control" name="categoria" placeholder="Categoria" value="'+ val.categoria +'" required>' +
+            '</div>' +
+            '<div class="form-group">' +
+              '<label>' +
+                '<span>Valor: </span>' +
+              '</label>' +
+              '<input type="text" class="form-control" name="valor" placeholder="Valor" value="'+ val.valor +'" required>' +
+            '</div>' +
+            '<div class="form-group">' +
+              '<label>' +
+                '<span>Quantidade: </span>' +
+              '</label>' +
+              '<input type="text" class="form-control" name="quantidade" placeholder="Quantidade" value="'+ val.quantidade +'" required>' +
+            '</div>' +
+            '<hr />'
+          )
+        });
 
-      function valAlteraProduto(val) {
-        console.log(JSON.stringify(val));
-        $('.formProduto').html(
-          '<div class="form-group">' +
-            '<label>' +
-              '<span>ID produto: </span>' +
-            '</label>' +
-            '<input type="text" class="form-control" name="_id" placeholder="ID produto" value="'+ val._id +'" readonly>' +
-          '</div>' +
-          '<div class="form-group">' +
-            '<label>' +
-              '<span>Nome: </span>' +
-            '</label>' +
-            '<input type="text" class="form-control" name="Nome" placeholder="Nome" value="" required>' +
-          '</div>' +
-          '<div class="form-group">' +
-            '<label>' +
-              '<span>Marca: </span>' +
-            '</label>' +
-            '<input type="text" class="form-control" name="marca" placeholder="Marca" value="" required>' +
-          '</div>' +
-          '<div class="form-group">' +
-            '<label>' +
-              '<span>Descrição: </span>' +
-            '</label>' +
-            '<input type="text" class="form-control" name="descricao" placeholder="Descrição" value="" required>' +
-          '</div>' +
-          '<div class="form-group">' +
-            '<label>' +
-              '<span>Categoria: </span>' +
-            '</label>' +
-            '<input type="text" class="form-control" name="categoria" placeholder="Categoria" value="" required>' +
-          '</div>' +
-          '<div class="form-group">' +
-            '<label>' +
-              '<span>Valor: </span>' +
-            '</label>' +
-            '<input type="text" class="form-control" name="valor" placeholder="Valor" value="" required>' +
-          '</div>' +
-          '<div class="form-group">' +
-            '<label>' +
-              '<span>Quantidade: </span>' +
-            '</label>' +
-            '<input type="text" class="form-control" name="quantidade" placeholder="Quantidade" value="" required>' +
-          '</div>'
-        )
-      };
+        var valorDaDiv = $(".mensagem").text();
+        $(".mensagem").html(valorDaDiv);
+
+      });
     </script>
 </head>
 
@@ -144,87 +156,58 @@
                           <i class="glyphicon glyphicon-menu-right"></i> Lista de produtos
                         </li>
                     </ol>
-                    <% if(mensagem.length > 0){ %>
-                      <div class="alert alert-warning aviso"><h2><%= mensagem %></h2></div>
-                    <% } else{ %>
-                        <div class="table-responsive">
-                          <table class="table table-hover">
-                              <thead>
+                    <div class="mensagem">
+                      <%= mensagem %>
+                    </div>
+                      <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>Marca</th>
+                                <th>Descrição</th>
+                                <th>Categoria</th>
+                                <th>Valor</th>
+                                <th>Quantidade</th>
+                                <th>Data cadastro</th>
+                                <th>Cadastro por</th>
+                                <th>Ações</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <% for(var i=0; i<produtos.length; i++) {%>
                                 <tr>
-                                  <th>ID</th>
-                                  <th>Nome</th>
-                                  <th>Marca</th>
-                                  <th>Descrição</th>
-                                  <th>Categoria</th>
-                                  <th>Valor</th>
-                                  <th>Quantidade</th>
-                                  <th>Data cadastro</th>
-                                  <th>Cadastro por</th>
-                                  <th>Ações</th>
+                                     <td><%= produtos[i].id %></td>
+                                     <td><%= produtos[i].Nome %></td>
+                                     <td><%= produtos[i].marca %></td>
+                                     <td><%= produtos[i].descricao %></td>
+                                     <td><%= produtos[i].categoria %></td>
+                                     <td><%= produtos[i].valor %></td>
+                                     <td><%= produtos[i].quantidade %></td>
+                                     <td><%= produtos[i].data_cadastro %></td>
+                                     <td><%= produtos[i].cadastro %></td>
+                                     <td>
+                                       <a type="button" data-toggle="modal" data-target="#myModal" class="btn btn-danger deletaAviso" id="<%= produtos[i].id %>" onclick="valProduto(this.id)">
+                                         <span class="glyphicon glyphicon-trash"></span>
+                                       </a>
+                                       <a type="button" data-toggle="modal" data-target="#myModalEdit" class="btn btn-warning editarProd" id="<%= JSON.stringify(produtos[i]) %>" value="<%= produtos[i] %>">
+                                         <span class="glyphicon glyphicon-edit"></span>
+                                       </a>
+                                     </td>
                                 </tr>
-                              </thead>
-                              <tbody>
-                                <% for(var i=0; i<produtos.length; i++) {%>
-                                  <tr>
-                                       <td><%= produtos[i].id %></td>
-                                       <td><%= produtos[i].Nome %></td>
-                                       <td><%= produtos[i].marca %></td>
-                                       <td><%= produtos[i].descricao %></td>
-                                       <td><%= produtos[i].categoria %></td>
-                                       <td><%= produtos[i].valor %></td>
-                                       <td><%= produtos[i].quantidade %></td>
-                                       <td><%= produtos[i].data_cadastro %></td>
-                                       <td><%= produtos[i].cadastro %></td>
-                                       <td>
-                                         <a type="button" data-toggle="modal" data-target="#myModal" class="btn btn-danger deletaAviso" id="<%= produtos[i].id %>" onclick="valProduto(this.id)">
-                                           <span class="glyphicon glyphicon-trash"></span>
-                                         </a>
-                                         <a type="button" data-toggle="modal" data-target="#myModalEdit" class="btn btn-warning" id="<%= produtos[i] %>" onclick="valAlteraProduto(this.id)">
-                                           <span class="glyphicon glyphicon-edit"></span>
-                                         </a>
-                                       </td>
-                                  </tr>
-                                  <div id="myModalEdit" class="modal fade" role="dialog">
-                                    <div class="modal-dialog">
-
-                                      <!-- Modal content-->
-                                      <div class="modal-content">
-                                        <div class="modal-header">
-                                          <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-                                        <div class="modal-body">
-                                          <form method="POST" action="/listaprodutos">
-                                            <input type="hidden" name="_method" value="PATCH"/>
-                                            <div class="col-lg-12">
-                                              <div class="col-lg-6 formProduto"></div>
-                                            </div>
-                                            <div class="modal-footer">
-                                              <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                              <button type="submit" class="btn btn-success">Alterar produto</button>
-                                            </div>
-                                          </div>
-                                          </form>
-                                        </div>
-                                    </div>
-                                  </div>
-                                <% } %>
-                              </tbody>
-                            </table>
-                        </div>
-                    <% } %>
+                              <% } %>
+                            </tbody>
+                          </table>
+                      </div>
                   </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
 
     <div id="myModal" class="modal fade" role="dialog">
       <div class="modal-dialog">
-
-        <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -234,7 +217,29 @@
           </div>
           <div class="modal-footer" id="btnDeletar"></div>
         </div>
+      </div>
+    </div>
 
+    <div id="myModalEdit" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Dados do produto</h4>
+          </div>
+          <div class="modal-body">
+            <form method="POST" action="/listaprodutos">
+              <input type="hidden" name="_method" value="PATCH"/>
+              <div class="col-lg-12">
+                <div class="col-lg-12 formProduto"></div>
+              </div>
+              <div class="buttons">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                <input type="submit" class="btn btn-success alteraProd" value="Alterar produto" />
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
 
