@@ -14,7 +14,7 @@ module.exports = {
   },
 
   execFindAvisos: (db, req, callback) => {
-    db.collection(req.collectionAcc.toString()).find({"id_cadastro": {$eq: req.id}}).toArray((err, data) => {
+    db.collection(req.collectionAcc.toString()).find({cpf: {$eq: req.cpf}}).toArray((err, data) => {
       if (err) {
         callback(err, null);
       } else {

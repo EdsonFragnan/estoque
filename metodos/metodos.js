@@ -28,9 +28,9 @@ module.exports = {
     });
   },
 
-  findAvisos: (collect, id, callback) => {
+  findAvisos: (collect, cpf, callback) => {
     const acessC = {
-      'id': id,
+      'cpf': cpf,
       'collectionAcc': collect
     };
     access((err, db) => {

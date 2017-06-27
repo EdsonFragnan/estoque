@@ -5,8 +5,8 @@ const comparar = (a, b) => {
 };
 
 module.exports.meusAvisos = (req, res, callback) => {
-  const id = req.user.cpf;
-  db.findAvisos('estoque_avisos', id, function(err, avisos) {
+  const cpf = req.user.cpf;
+  db.findAvisos('estoque_avisos', cpf, function(err, avisos) {
     if (err) {
       callback(err);
     } else if (!avisos) {
