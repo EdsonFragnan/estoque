@@ -29,15 +29,11 @@ module.exports = {
   },
 
   findAvisos: (collect, cpf, callback) => {
-    const acessC = {
-      'cpf': cpf,
-      'collectionAcc': collect
-    };
     access((err, db) => {
       if (err) {
         callback(err, null);
       } else {
-        operations.execFindAvisos(db, acessC, (err, data) => {
+        operations.execFindAvisos(db, collect, cpf, (err, data) => {
           if (err) {
             callback(err, null);
           } else {

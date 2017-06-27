@@ -13,8 +13,8 @@ module.exports = {
     });
   },
 
-  execFindAvisos: (db, req, callback) => {
-    db.collection(req.collectionAcc.toString()).find({cpf: {$eq: req.cpf}}).toArray((err, data) => {
+  execFindAvisos: (db, collect, req, callback) => {
+    db.collection(collect).find({id_cadastro: {$eq:req}}).toArray((err, data) => {
       if (err) {
         callback(err, null);
       } else {
